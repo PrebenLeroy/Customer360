@@ -21,6 +21,14 @@
 					"odataVersion": "2.0",
 					"localUri": "localService/metadata.xml"
 				}
+			},
+			"ZV_ZVT18_CUSTM_PL_CDS": {
+				"uri": "/sap/opu/odata/sap/ZV_ZVT18_CUSTM_PL_CDS/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/ZV_ZVT18_CUSTM_PL_CDS/metadata.xml"
+				}
 			}
 		}
 	},
@@ -70,6 +78,22 @@
 				"type": "sap.ui.model.json.JSONModel",
 				"settings": {},
 				"preload": false
+			},
+			"": {
+				"uri": "/sap/opu/odata/sap/ZV_ZVT18_CUSTM_PL_CDS/",
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZV_ZVT18_CUSTM_PL_CDS",
+				"preload": true
+			},
+			"customersModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
 			}
 		},
 		"resources": {
@@ -85,11 +109,25 @@
 				"viewPath": "com.delaware.pl.trac2018.view",
 				"controlId": "idAppControl"
 			},
-			"routes": [
-			
-			],
+			"routes": [{
+				"name": "Master",
+				"pattern": "",
+				"target": "Master"
+			}],
 			"targets": {
-				
+				"Master": {
+					"viewType": "XML",
+					"viewName": "Master",
+					"routerClass": "sap.f.routing.Router",
+					"async": true,
+					"viewPath": "com.delaware.pl.trac2018.view",
+					"controlId": "idAppControl",
+					"controlAggregation": "beginColumnPages"
+				},
+				"Detail": {
+					"viewType": "XML",
+					"viewName": "Detail"
+				}
 			}
 		}
 	}
