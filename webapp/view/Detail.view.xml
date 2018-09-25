@@ -2,8 +2,48 @@
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Title">
-				<content></content>
+			<Page title="{i18n>Detail.List.DetailTitle}">
+				<content>
+					<ObjectHeader title="{customer>/name}" icon="sap-icon://customer">
+						<attributes>
+							<ObjectAttribute text="{customer>/city}"/>
+							<ObjectAttribute text="{customer>/country}"/>
+							<ObjectAttribute text="{customer>/CustomerNumber}"/>
+						</attributes>
+					</ObjectHeader>
+					<Table items="{orderViewModel>/orders}">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="{i18n>Common.SalesOrders}"/>
+								<ToolbarSpacer/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column>
+								<Text text="{i18n>Detail.Table.SalesOrderNumber}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>Detail.Table.PONumber}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>Detail.Table.DeliveryDate}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>Detail.Table.Value}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier title="{orderViewModel>Id}"/>
+									<Text text="{orderViewModel>OrderNumber}"/>
+									<Text text="{path: 'orderViewModel>RequestedDeliveryDate', formatter: '.formatter.formatDate'}"/>
+									<Text text="{orderViewModel>NetValue}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
 			</Page>
 		</pages>
 	</App>

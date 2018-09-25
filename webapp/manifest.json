@@ -29,6 +29,14 @@
 					"odataVersion": "2.0",
 					"localUri": "localService/ZV_ZVT18_CUSTM_PL_CDS/metadata.xml"
 				}
+			},
+			"ZV_ZVT18_ORDERS_PL_CDS": {
+				"uri": "/sap/opu/odata/sap/ZV_ZVT18_ORDERS_PL_CDS/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/ZV_ZVT18_ORDERS_PL_CDS/metadata.xml"
+				}
 			}
 		}
 	},
@@ -47,7 +55,10 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": ["sap_hcb", "sap_belize"]
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
 	},
 	"sap.ui5": {
 		"rootView": {
@@ -94,12 +105,36 @@
 				"type": "sap.ui.model.json.JSONModel",
 				"settings": {},
 				"preload": false
+			},
+			"customer": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			},
+			"ordersModel": {
+				"uri": "/sap/opu/odata/sap/ZV_ZVT18_ORDERS_PL_CDS/",
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+					"useBatch": false
+				},
+				"dataSource": "ZV_ZVT18_ORDERS_PL_CDS",
+				"preload": true
+			},
+			"orderViewModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
 			}
 		},
 		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		},
 		"routing": {
 			"config": {
@@ -109,11 +144,21 @@
 				"viewPath": "com.delaware.pl.trac2018.view",
 				"controlId": "idAppControl"
 			},
-			"routes": [{
-				"name": "Master",
-				"pattern": "",
-				"target": "Master"
-			}],
+			"routes": [
+				{
+					"name": "Master",
+					"pattern": "",
+					"target": "Master"
+				},
+				{
+					"name": "Detail",
+					"pattern": "customer/{customerNumber}",
+					"target": [
+						"Master",
+						"Detail"
+					]
+				}
+			],
 			"targets": {
 				"Master": {
 					"viewType": "XML",
@@ -126,7 +171,8 @@
 				},
 				"Detail": {
 					"viewType": "XML",
-					"viewName": "Detail"
+					"viewName": "Detail",
+					"controlAggregation": "midColumnPages"
 				}
 			}
 		}

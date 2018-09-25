@@ -1,9 +1,23 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"com/delaware/pl/trac2018/controller/BaseController",
+	"com/delaware/pl/trac2018/model/formatter"
+], function (BaseController, formatter) {
 	"use strict";
 
-	return Controller.extend("com.delaware.pl.trac2018.controller.Master", {
+	return BaseController.extend("com.delaware.pl.trac2018.controller.Master", {
+
+		formatter : formatter,
+		
+		OnCustomerPress : function(oEvent){
+			var oCustomer = oEvent.getSource().getBindingContext().getObject();
+			this.getModel("customer").setData(oCustomer);
+			
+			this.getRouter().navTo("Detail", {
+				customerNumber: oCustomer.CustomerNumber
+			});
+			
+			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
+		},
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
